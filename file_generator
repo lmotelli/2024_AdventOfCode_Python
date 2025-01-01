@@ -1,0 +1,28 @@
+import os
+
+def generate_input_files():
+    # Nome della cartella
+    folder_name = "inputs"
+
+    # Creazione della cartella se non esiste
+    if not os.path.exists(folder_name):
+        os.makedirs(folder_name)
+
+    # Generazione dei file
+    for i in range(5, 26):
+        file_base_name = f"input{str(i).zfill(2)}"
+        file_paths = [
+            os.path.join(folder_name, file_base_name + ".txt"),
+            os.path.join(folder_name, file_base_name + "_test.txt"),
+        ]
+
+        for file_path in file_paths:
+            # Creazione del file vuoto
+            with open(file_path, "w") as f:
+                pass
+
+    print(f"Files creati nella cartella '{folder_name}'.")
+
+# Esecuzione della funzione
+if __name__ == "__main__":
+    generate_input_files()
