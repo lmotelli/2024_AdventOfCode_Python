@@ -9,7 +9,7 @@ def generate_input_files():
         os.makedirs(folder_name)
 
     # Generazione dei file
-    for i in range(5, 26):
+    for i in range(1, 26):
         file_base_name = f"input{str(i).zfill(2)}"
         file_paths = [
             os.path.join(folder_name, file_base_name + ".txt"),
@@ -17,12 +17,44 @@ def generate_input_files():
         ]
 
         for file_path in file_paths:
-            # Creazione del file vuoto
-            with open(file_path, "w") as f:
-                pass
+            # Creazione del file vuoto solo se non esiste
+            if not os.path.exists(file_path):
+                with open(file_path, "w") as f:
+                    pass
 
     print(f"Files creati nella cartella '{folder_name}'.")
 
-# Esecuzione della funzione
+def generate_solution_folders():
+    # Nome della cartella
+    folder_name = "solutions"
+
+    # Creazione della cartella se non esiste
+    if not os.path.exists(folder_name):
+        os.makedirs(folder_name)
+
+    # Generazione dei folder e file
+    for i in range(1, 26):
+        day_folder_name = os.path.join(folder_name, f"day_{str(i).zfill(2)}")
+
+        # Creazione della cartella day_X
+        if not os.path.exists(day_folder_name):
+            os.makedirs(day_folder_name)
+
+        # Creazione dei file task_01 e task_02
+        file_paths = [
+            os.path.join(day_folder_name, "task_01.py"),
+            os.path.join(day_folder_name, "task_02.py"),
+        ]
+
+        for file_path in file_paths:
+            # Creazione del file vuoto solo se non esiste
+            if not os.path.exists(file_path):
+                with open(file_path, "w") as f:
+                    pass
+
+    print(f"Folders e file creati nella cartella '{folder_name}'.")
+
+# Esecuzione delle funzioni
 if __name__ == "__main__":
     generate_input_files()
+    generate_solution_folders()
