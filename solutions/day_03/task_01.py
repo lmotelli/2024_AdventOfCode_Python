@@ -13,7 +13,7 @@ def sumOfMul():
         #print(allMultiplication)
         for element in allMultiplication:
             totalSum = totalSum + multiplication(element)
-            print("totalSum: " + str(totalSum))
+            #print("totalSum: " + str(totalSum))
     print("final totalSum: " + str(totalSum))
         
         
