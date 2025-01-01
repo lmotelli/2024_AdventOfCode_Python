@@ -1,0 +1,59 @@
+import fileinput
+
+def calculateNumberOfSaveLevels():
+    fileName = input("please enter the file path:\n")
+    fileOpen = open(fileName, "r")
+    
+    singleLevel = []
+    safeReports = 0
+    
+    correctedLines = []
+    numLine = 0
+    
+    for line in fileOpen:
+        numLine += 1
+        splittedLine = line.split()
+        
+        for index in range(len(splittedLine)):
+            singleLevel.append(int(splittedLine[index]))
+        #print(singleLevel)
+        
+        if(checkLevelSafeness(singleLevel, 1)):
+            safeReports += 1
+            correctedLines.append(numLine)
+        singleLevel = []
+        
+    print(correctedLines)
+    return safeReports
+
+def checkLevelSafeness(levelToCheck, timeCalled):
+    if(timeCalled > 2):
+        return False
+    
+    isIncreasing = False
+    isDecreasing = False
+    
+    for index in range(len(levelToCheck)-1):
+        difference = levelToCheck[index] - levelToCheck[index+1]
+            
+        if(difference < -3 or difference > 3 or difference == 0):
+            newLevelToCheck = levelToCheck
+            previousDifference = 0
+            if(index == 0):
+                newLevelToCheck.pop(0)
+            elif(difference < -3 ):
+                previousDifference = newLevelToCheck[index-1] - newLevelToCheck[index]
+            return checkLevelSafeness(newLevelToCheck, timeCalled+1)
+        
+        if(difference < 0 ):
+            isIncreasing = True
+        else:
+            isDecreasing = True
+            
+        if(isDecreasing & isIncreasing):
+            levelToCheck.pop(index+1)
+            return checkLevelSafeness(levelToCheck, timeCalled+1)
+            
+    return True
+                  
+print(calculateNumberOfSaveLevels())
