@@ -1,12 +1,11 @@
 import fileinput
 
-def calculateNumberOfSaveLevels():
+def calculateNumberOfSaveLevelsWithProblemDampener():
     fileName = input("please enter the file path:\n")
     fileOpen = open(fileName, "r")
     
     singleLevel = []
     safeReports = 0
-    
     correctedLines = []
     numLine = 0
     
@@ -16,20 +15,38 @@ def calculateNumberOfSaveLevels():
         
         for index in range(len(splittedLine)):
             singleLevel.append(int(splittedLine[index]))
-        #print(singleLevel)
         
-        if(checkLevelSafeness(singleLevel, 1)):
+        if(checkLevelSafenessSubArray(singleLevel)):
             safeReports += 1
             correctedLines.append(numLine)
         singleLevel = []
-        
+    
+    #print("corrected lines:")
     print(correctedLines)
     return safeReports
 
-def checkLevelSafeness(levelToCheck, timeCalled):
-    if(timeCalled > 2):
-        return False
+def checkLevelSafenessSubArray(totalArray):
+    if(checkLevelSafeness(totalArray)):
+        return True
     
+    subArray = []
+    
+    for index in range(len(totalArray)):
+        subArray = copy(totalArray)
+        subArray.pop(index)
+        
+        if(checkLevelSafeness(subArray)):
+            return True
+        
+def copy(totalArray):
+    arrayToReturn = []
+    for index in range(len(totalArray)):
+        arrayToReturn.append(totalArray[index])
+        
+    return arrayToReturn
+        
+
+def checkLevelSafeness(levelToCheck):
     isIncreasing = False
     isDecreasing = False
     
@@ -37,13 +54,7 @@ def checkLevelSafeness(levelToCheck, timeCalled):
         difference = levelToCheck[index] - levelToCheck[index+1]
             
         if(difference < -3 or difference > 3 or difference == 0):
-            newLevelToCheck = levelToCheck
-            previousDifference = 0
-            if(index == 0):
-                newLevelToCheck.pop(0)
-            elif(difference < -3 ):
-                previousDifference = newLevelToCheck[index-1] - newLevelToCheck[index]
-            return checkLevelSafeness(newLevelToCheck, timeCalled+1)
+            return False
         
         if(difference < 0 ):
             isIncreasing = True
@@ -51,9 +62,8 @@ def checkLevelSafeness(levelToCheck, timeCalled):
             isDecreasing = True
             
         if(isDecreasing & isIncreasing):
-            levelToCheck.pop(index+1)
-            return checkLevelSafeness(levelToCheck, timeCalled+1)
+            return False
             
     return True
-                  
-print(calculateNumberOfSaveLevels())
+
+print(calculateNumberOfSaveLevelsWithProblemDampener())
