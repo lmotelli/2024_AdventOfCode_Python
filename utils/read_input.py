@@ -1,14 +1,13 @@
-import fileinput
+#import fileinput
 
-def read_input_file():
-    filePath = "C:\Users\loren\.vscode\2024_AdventOfCode_Python\2024_AdventOfCode_Python\inputs\input"
-    day = input("enter the day")
-    isTest = input("do you want to test/debug?")
+def read_input_file(daySelected, isTest):
+    filePath = "C:/Users/loren/.vscode/2024_AdventOfCode_Python/2024_AdventOfCode_Python/inputs/input"
     
     if(isTest):
-        fileName = filePath + day + "_test.txt"
+        fileName = filePath + daySelected + "_test.txt"
     else:
-        fileName = filePath + day + ".txt"
+        fileName = filePath + daySelected + ".txt"
+    print(fileName)
     fileOpen = open(fileName, "r")
     
     return fileOpen

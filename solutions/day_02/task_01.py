@@ -1,13 +1,13 @@
 import fileinput
 
-def calculateNumberOfSaveLevels():
-    fileName = input("please enter the file path:\n")
-    fileOpen = open(fileName, "r")
+def solution(fileInput):
+    #fileName = input("please enter the file path:\n")
+    #fileOpen = open(fileName, "r")
     
     singleLevel = []
     safeReports = 0
     
-    for line in fileOpen:
+    for line in fileInput:
         splittedLine = line.split()
         
         for index in range(len(splittedLine)):
@@ -18,7 +18,7 @@ def calculateNumberOfSaveLevels():
             safeReports += 1
         singleLevel = []
         
-    return safeReports
+    print(safeReports)
 
 def checkLevelSafeness(levelToCheck):
     isSafe = True
@@ -44,5 +44,3 @@ def checkLevelSafeness(levelToCheck):
             break
             
     return isSafe
-                  
-print(calculateNumberOfSaveLevels())

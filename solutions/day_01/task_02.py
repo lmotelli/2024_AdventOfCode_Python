@@ -1,10 +1,8 @@
-import fileinput
-        
-def createSortArrays(firstArray, secondArray):
-    fileName = input("please enter the file path:\n")
-    fileOpen = open(fileName, "r")
+def createSortArrays(firstArray, secondArray, fileInput):
+    #fileName = input("please enter the file path:\n")
+    #fileOpen = open(fileName, "r")
     
-    for line in fileOpen:
+    for line in fileInput:
         splittedLine = line.split()
         firstArray.append(int(splittedLine[0]))
         secondArray.append(int(splittedLine[1]))
@@ -12,11 +10,11 @@ def createSortArrays(firstArray, secondArray):
     firstArray.sort()
     secondArray.sort()
     
-def calculateSimilarityScore():
+def solution(fileInput):
     firstArray = [] 
     secondArray = []
     
-    createSortArrays(firstArray, secondArray)
+    createSortArrays(firstArray, secondArray, fileInput)
     
     lastIndexFirstArray = 0
     lastIndexSecondArray = 0
@@ -38,6 +36,7 @@ def calculateSimilarityScore():
             
             while(firstArray[indexFirstArray] == secondArray[indexSecondArray+totalNumberFind]):
                 totalNumberFind += 1
+                
             if(totalNumberFind > 0):
                 while(firstArray[indexFirstArray] == firstArray[indexFirstArray + timeNumberInFirstArray]):
                     timeNumberInFirstArray += 1
@@ -48,7 +47,6 @@ def calculateSimilarityScore():
             
             totalNumberFind = 0
             timeNumberInFirstArray = 1
-        
-    return similarityScore
-       
-print(calculateSimilarityScore())
+     
+    print(similarityScore)   
+    #return similarityScore

@@ -1,20 +1,21 @@
 import fileinput
 import re #regular expression
 
-def sumOfMul():
-    fileName = input("please enter the file path:\n")
-    fileOpen = open(fileName, "r")
+def solution(fileInput):
+    #fileName = input("please enter the file path:\n")
+    #fileOpen = open(fileName, "r")
     
     allMultiplication = []
     totalSum = 0
     
-    for line in fileOpen:
+    for line in fileInput:
         allMultiplication = re.findall(r"mul\(\d{1,3},\d{1,3}\)", line)
         #print(allMultiplication)
         for element in allMultiplication:
             totalSum = totalSum + multiplication(element)
             #print("totalSum: " + str(totalSum))
-    print("final totalSum: " + str(totalSum))
+    print(totalSum)
+        
         
         
 def multiplication(moltiplicationFunction):
@@ -26,5 +27,3 @@ def multiplication(moltiplicationFunction):
     #print("firstInt: " + str(firstInt))
     #print("secondInt: " + str(secondInt))
     return firstInt*secondInt
-    
-sumOfMul()

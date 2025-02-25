@@ -1,15 +1,15 @@
 import fileinput
 
-def calculateNumberOfSaveLevelsWithProblemDampener():
-    fileName = input("please enter the file path:\n")
-    fileOpen = open(fileName, "r")
+def solution(fileInput):
+    #fileName = input("please enter the file path:\n")
+    #fileOpen = open(fileName, "r")
     
     singleLevel = []
     safeReports = 0
     correctedLines = []
     numLine = 0
     
-    for line in fileOpen:
+    for line in fileInput:
         numLine += 1
         splittedLine = line.split()
         
@@ -22,8 +22,8 @@ def calculateNumberOfSaveLevelsWithProblemDampener():
         singleLevel = []
     
     #print("corrected lines:")
-    print(correctedLines)
-    return safeReports
+    #print(correctedLines)
+    print(safeReports)
 
 def checkLevelSafenessSubArray(totalArray):
     if(checkLevelSafeness(totalArray)):
@@ -65,5 +65,3 @@ def checkLevelSafeness(levelToCheck):
             return False
             
     return True
-
-print(calculateNumberOfSaveLevelsWithProblemDampener())
